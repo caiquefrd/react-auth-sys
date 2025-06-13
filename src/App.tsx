@@ -1,26 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './routes/ProtectedRoute';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface User {
+  email: string;
 }
 
+const App: React.FC = () => {
+  const [user, setUser] = useState<User | null>(() => {
+    const stored = localStorage.getItem('user');
+    return stored ? JSON.parse(stored) as User : null;
+  });
+
+  const login = (email: string, password: string) => {
+    const fakeUser = { email };
+    setUser(fakeUser);
+    localStorage.setItem('user', JSON.stringify(fakeUser));
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
+
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route path="/login" element={<Login login={login} />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute user={user}>
+            <Dashboard user={user!} logout={logout} />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+  );
+};
+
 export default App;
+
+// import React from 'react';
+// import { Routes, Route, Navigate } from 'react-router-dom';
+// import Login from './pages/Login';
+// import Dashboard from './pages/Dashboard';
+// import ProtectedRoute from './routes/ProtectedRoute';
+
+// const App: React.FC = () => (
+//   <Routes>
+//     <Route path="/" element={<Navigate to="/login" replace />} />
+//     <Route path="/login" element={<Login />} />
+//     <Route
+//       path="/dashboard"
+//       element={
+//         <ProtectedRoute>
+//           <Dashboard />
+//         </ProtectedRoute>
+//       }
+//     />
+//   </Routes>
+// );
+
+// export default App;
