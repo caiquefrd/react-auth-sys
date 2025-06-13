@@ -1,46 +1,96 @@
-# Getting Started with Create React App
+# 🛡️ Sistema de Autenticação com React + TypeScript
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este é um projeto simples de autenticação de usuários utilizando **React Router**, **TypeScript** e o conceito de **lifting state up** para controle de login.
 
-## Available Scripts
+## 📁 Estrutura do Projeto
 
-In the project directory, you can run:
+```
+src/
+├── App.tsx
+├── index.tsx
+├── styles.css
+├── pages/
+│   ├── Login.tsx
+│   └── Dashboard.tsx
+└── routes/
+    └── ProtectedRoute.tsx
+```
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 Como Executar
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 1. Clone o repositório
 
-### `npm test`
+```bash
+git clone https://github.com/caiquefrd/react-auth-sys.git
+cd react-auth-sys
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Instale as dependências
 
-### `npm run build`
+```bash
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. Configure o TypeScript
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Crie o arquivo `tsconfig.json` com:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npx tsc --init
+```
 
-### `npm run eject`
+Ou copie este conteúdo:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```json
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 4. Inicie o servidor de desenvolvimento
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+npm start
+```
+---
 
-## Learn More
+## 🧪 Funcionalidades
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* Página de **login** com validação simples
+* Rota **protegida** (`/dashboard`)
+* **Persistência** de login com `localStorage`
+* **Logout** com limpeza de estado
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
+## ✅ Tecnologias Usadas
+
+* React
+* TypeScript
+* React Router DOM
+* HTML/CSS
+
+---
+
+## 💡 Observações
+
+* Este projeto não se conecta com um backend real.
+* O usuário é simulado apenas com `email` e `localStorage`.
+
+---
